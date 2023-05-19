@@ -43,10 +43,10 @@ function Card(props) {
   const answer = props.answer;
 
   return (
-    <CardSyle>
+    <CardSyle data-test="flashcard">
       <div>
-        <h2>Pergunta {cardNumber}</h2>
-        <img src={playArrow}></img>
+        <h2 data-test="flashcard-text">Pergunta {cardNumber}</h2>
+        <img src={playArrow} data-test="play-btn"></img>
       </div>
     </CardSyle>
   )
