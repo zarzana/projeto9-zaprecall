@@ -8,7 +8,7 @@ function StatusBar() {
     align-items: center;
     justify-content: center;
 
-    position: absolute;
+    position: fixed;
     left: 0;
     bottom: 0;
     width: 100%;

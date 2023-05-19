@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import playArrow from "../assets/seta_play.png";
 
-function Card() {
+function Card(props) {
 
   const CardSyle = styled.div`
 
@@ -38,13 +38,17 @@ function Card() {
 
 `;
 
+  const cardNumber = props.index + 1;
+  const question = props.question;
+  const answer = props.answer;
+
   return (
-  <CardSyle>
-    <div>
-      <h2>Pergunta X</h2>
-      <img src={playArrow}></img>
-    </div>
-  </CardSyle>
+    <CardSyle>
+      <div>
+        <h2>Pergunta {cardNumber}</h2>
+        <img src={playArrow}></img>
+      </div>
+    </CardSyle>
   )
 
 }
