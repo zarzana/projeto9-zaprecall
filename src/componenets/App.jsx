@@ -1,11 +1,13 @@
-import Content from "./Content";
+import Title from "./Title";
+import Cards from "./Cards";
 import StatusBar from "./StatusBar";
 
 function App() {
 
   return (
     <>
-      <Content />
+      <Title />
+      <Cards />
       <StatusBar />
     </>
   )
