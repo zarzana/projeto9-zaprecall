@@ -5,12 +5,14 @@ import flipButton from "../assets/seta_virar.png";
 
 function Card(props) {
 
-  const cardNumber = props.index + 1;
-  const question = props.question;
-  const answer = props.answer;
+  const textRelationship = {
+    'closed': 'Pergunta ' + (props.index + 1),
+    'opened': props.question,
+    'flipped': props.answer,
+    'finished': 'Pergunta ' + (props.index + 1)
+  }
 
   const [cardStatus, setCardStatus] = useState('closed');
-  const [cardText, setCardText] = useState(cardNumber);
 
   const CardStyle = styled.div`
 
@@ -61,17 +63,17 @@ function Card(props) {
 
 `;
 
+  // POSSIBLY REMOVE IF 
   const cardClick = () => {
 
     setCardStatus('opened');
-    setCardText(question);
 
   };
 
   return (
     <CardStyle data-test="flashcard">
       <div>
-        <h2 data-test="flashcard-text">Pergunta {cardText}</h2>
+        <h2 data-test="flashcard-text">{textRelationship[cardStatus]}</h2>
         <img id='playButton' src={playButton} onClick={cardClick} data-test="play-btn"></img>
         <img id='flipButton' src={flipButton} data-test="turn-btn"></img>
       </div>
