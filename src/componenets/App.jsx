@@ -1,10 +1,11 @@
+import Content from "./Content";
 import StatusBar from "./StatusBar";
 
 function App() {
 
   return (
     <>
-      <p>test</p>
+      <Content />
       <StatusBar />
     </>
   )

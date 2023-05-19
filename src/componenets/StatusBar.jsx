@@ -5,8 +5,8 @@ function StatusBar() {
   const StatusBarStyle = styled.div`
 
     display: flex;
-    align-items:center;
-    justify-content:center;
+    align-items: center;
+    justify-content: center;
 
     position: absolute;
     left: 0;
