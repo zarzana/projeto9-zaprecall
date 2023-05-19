@@ -51,5 +51,6 @@ export const ResetStyle = createGlobalStyle`
 export const GlobalStyle = createGlobalStyle`
   body {
     background: #FB6B6B;
+    font-family: 'Recursive';
   }
 `
