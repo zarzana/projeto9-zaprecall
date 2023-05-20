@@ -8,6 +8,9 @@ import iconPartial from "../assets/icone_quase.png";
 
 function Card(props) {
 
+  const statusNumber = props.statusNumber;
+  const setStatusNumber = props.setStatusNumber;
+
   const cardText = {
     'closed': 'Pergunta ' + (props.index + 1),
     'opened': props.question,
@@ -136,7 +139,7 @@ function Card(props) {
 
   const answerClick = (event) => {
 
-    switch(event.target.id) {
+    switch (event.target.id) {
       case 'noButton':
         setAnswerStatus(0);
         break;
@@ -149,6 +152,7 @@ function Card(props) {
     }
 
     setCardStatus('finished');
+    setStatusNumber(statusNumber + 1);
 
   };
 
@@ -161,10 +165,10 @@ function Card(props) {
         <img id='answerIcon' src={answerStatusImages[answerStatus]} data-test={answerStatusDataTests[answerStatus]}></img>
       </div>
       <div id='flippedButtonsDiv'>
-          <button id='noButton' onClick={answerClick} data-test="no-btn">Não lembrei</button>
-          <button id='partialButton' onClick={answerClick} data-test="partial-btn">Quase não lembrei</button>
-          <button id='zapButton' onClick={answerClick} data-test="zap-btn">Zap!</button>
-        </div>
+        <button id='noButton' onClick={answerClick} data-test="no-btn">Não lembrei</button>
+        <button id='partialButton' onClick={answerClick} data-test="partial-btn">Quase não lembrei</button>
+        <button id='zapButton' onClick={answerClick} data-test="zap-btn">Zap!</button>
+      </div>
     </CardStyle>
   )
 

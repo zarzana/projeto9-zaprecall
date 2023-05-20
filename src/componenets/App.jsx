@@ -1,8 +1,11 @@
 import Title from "./Title";
 import Cards from "./Cards";
 import StatusBar from "./StatusBar";
+import { useState } from "react";
 
 function App() {
+
+  const [statusNumber, setStatusNumber] = useState(0);
 
   const flashcards = [
     { question: "O que é JSX?", answer: "Uma extensão da linguagem JavaScript" },
@@ -18,8 +21,8 @@ function App() {
   return (
     <>
       <Title />
-      <Cards flashcards={flashcards} />
-      <StatusBar />
+      <Cards flashcards={flashcards} statusNumber={statusNumber} setStatusNumber={setStatusNumber} />
+      <StatusBar statusNumber={statusNumber} maxStatusNumber={flashcards.length} />
     </>
   )
 

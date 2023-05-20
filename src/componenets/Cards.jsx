@@ -17,7 +17,8 @@ function Cards(props) {
     <CardsStyle>
 
       {flashcards.map((flashcard, index) =>
-        <Card key={index} index={index} question={flashcard.question} answer={flashcard.answer} />)}
+        <Card key={index} index={index} question={flashcard.question} answer={flashcard.answer}
+          statusNumber={props.statusNumber} setStatusNumber={props.setStatusNumber} />)}
 
     </CardsStyle>
   )

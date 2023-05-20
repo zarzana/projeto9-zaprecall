@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-function StatusBar() {
+function StatusBar(props) {
 
   const StatusBarStyle = styled.div`
 
@@ -27,7 +27,7 @@ function StatusBar() {
 
   return (
     <StatusBarStyle>
-      <p>0/4 CONCLUÍDOS</p>
+      <p>{props.statusNumber}/{props.maxStatusNumber} CONCLUÍDOS</p>
     </StatusBarStyle>
   )
 
