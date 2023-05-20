@@ -27,7 +27,7 @@ function StatusBar(props) {
 
   return (
     <StatusBarStyle>
-      <p>{props.statusNumber}/{props.maxStatusNumber} CONCLUÍDOS</p>
+      <p data-test="footer">{props.statusNumber}/{props.maxStatusNumber} CONCLUÍDOS</p>
     </StatusBarStyle>
   )
 
