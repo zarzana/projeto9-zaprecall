@@ -8,8 +8,16 @@ import iconPartial from "../assets/icone_quase.png";
 
 function Card(props) {
 
-  const statusNumber = props.statusNumber;
   const setStatusNumber = props.setStatusNumber;
+  const finishedCards = props.finishedCards;
+  const setFinishedCards = props.setFinishedCards;
+  const finishedStatus = finishedCards[props.index];
+
+  let initialCardStatus; 
+  finishedStatus == -1 ? initialCardStatus = 'closed' : initialCardStatus = 'finished';
+
+  const [answerStatus, setAnswerStatus] = useState(finishedStatus);
+  const [cardStatus, setCardStatus] = useState(initialCardStatus);
 
   const cardText = {
     'closed': 'Pergunta ' + (props.index + 1),
@@ -30,10 +38,6 @@ function Card(props) {
     2: "zap-icon"
   }
 
-  const [cardStatus, setCardStatus] = useState('closed');
-
-  const [answerStatus, setAnswerStatus] = useState(undefined);
-
   const CardStyle = styled.div`
 
     width: 300px;
@@ -45,7 +49,7 @@ function Card(props) {
 
     margin-bottom: 25px;
 
-    #cardContentDiv {
+    [style_id= "cardContentDiv"] {
 
       position: relative;
       height: 65px;
@@ -64,13 +68,13 @@ function Card(props) {
         color: #333333;
       }
 
-      #playButton {
+      [style_id= "playButton"] {
         display: ${['closed'].includes(cardStatus) ? 'block' : 'none'};
         width: 20px;
         height: 23px;
       }
 
-      #flipButton {
+      [style_id= "flipButton"] {
         display: ${['opened'].includes(cardStatus) ? 'block' : 'none'};
         position: absolute;
         width: 30px;
@@ -79,7 +83,7 @@ function Card(props) {
         margin-top: 100px;
       }
 
-      #answerIcon {
+      [style_id= "answerIcon"] {
         display: ${['finished'].includes(cardStatus) ? 'block' : 'none'};
         width: 23px;
         height: 23px;
@@ -87,7 +91,7 @@ function Card(props) {
     
     }
 
-    #flippedButtonsDiv {
+    [style_id= "flippedButtonsDiv"] {
 
         display: ${['flipped'].includes(cardStatus) ? 'flex' : 'none'};
         justify-content: space-between;
@@ -109,15 +113,15 @@ function Card(props) {
           text-align: center;
         }
 
-        #noButton {
+        [style_id= "noButton"] {
           background: #FF3030;
         }
 
-        #partialButton {
+        [style_id= "partialButton"] {
           background: #FF922E;
         }
 
-        #zapButton {
+        [style_id= "zapButton"] {
           background: #2FBE34;
         }
 
@@ -139,35 +143,41 @@ function Card(props) {
 
   const answerClick = (event) => {
 
-    switch (event.target.id) {
+    let status;
+
+    switch (event.target.getAttribute("style_id")) {
       case 'noButton':
-        setAnswerStatus(0);
+        status = 0;
         break;
       case 'partialButton':
-        setAnswerStatus(1);
+        status = 1;
         break;
       case 'zapButton':
-        setAnswerStatus(2);
+        status = 2;
         break;
     }
 
     setCardStatus('finished');
-    setStatusNumber(statusNumber + 1);
+    let updatedFinishedCards = [...finishedCards];
+    updatedFinishedCards[props.index] = status;
+    setFinishedCards(updatedFinishedCards);
+    setAnswerStatus(status);
+    setStatusNumber(prevStatusNumber => prevStatusNumber + 1);
 
   };
 
   return (
     <CardStyle data-test="flashcard">
-      <div id='cardContentDiv'>
+      <div style_id='cardContentDiv'>
         <h2 data-test="flashcard-text">{cardText[cardStatus]}</h2>
-        <img id='playButton' src={playButton} onClick={playClick} data-test="play-btn"></img>
-        <img id='flipButton' src={flipButton} onClick={flipClick} data-test="turn-btn"></img>
-        <img id='answerIcon' src={answerStatusImages[answerStatus]} data-test={answerStatusDataTests[answerStatus]}></img>
+        <img style_id='playButton' src={playButton} onClick={playClick} data-test="play-btn"></img>
+        <img style_id='flipButton' src={flipButton} onClick={flipClick} data-test="turn-btn"></img>
+        <img style_id='answerIcon' src={answerStatusImages[answerStatus]} data-test={answerStatusDataTests[answerStatus]}></img>
       </div>
-      <div id='flippedButtonsDiv'>
-        <button id='noButton' onClick={answerClick} data-test="no-btn">Não lembrei</button>
-        <button id='partialButton' onClick={answerClick} data-test="partial-btn">Quase não lembrei</button>
-        <button id='zapButton' onClick={answerClick} data-test="zap-btn">Zap!</button>
+      <div style_id='flippedButtonsDiv'>
+        <button style_id='noButton' onClick={answerClick} data-test="no-btn">Não lembrei</button>
+        <button style_id='partialButton' onClick={answerClick} data-test="partial-btn">Quase não lembrei</button>
+        <button style_id='zapButton' onClick={answerClick} data-test="zap-btn">Zap!</button>
       </div>
     </CardStyle>
   )

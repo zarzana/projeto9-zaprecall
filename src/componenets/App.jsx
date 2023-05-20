@@ -18,10 +18,13 @@ function App() {
     { question: "Usamos estado (state) para __", answer: "Dizer quais informações quando atualizadas devem renderizar a tela novamente" }
   ]
 
+  const [finishedCards, setFinishedCards] = useState(Array(flashcards.length).fill(-1))
+
   return (
     <>
       <Title />
-      <Cards flashcards={flashcards} statusNumber={statusNumber} setStatusNumber={setStatusNumber} />
+      <Cards flashcards={flashcards} setStatusNumber={setStatusNumber}
+        finishedCards={finishedCards} setFinishedCards={setFinishedCards} />
       <StatusBar statusNumber={statusNumber} maxStatusNumber={flashcards.length} />
     </>
   )
