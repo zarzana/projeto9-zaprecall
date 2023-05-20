@@ -13,8 +13,21 @@ function Card(props) {
   const setFinishedCards = props.setFinishedCards;
   const finishedStatus = finishedCards[props.index];
 
-  let initialCardStatus; 
-  finishedStatus == 'unfinished' ? initialCardStatus = 'closed' : initialCardStatus = 'finished';
+  const cardActivity = props.cardActivity;
+  const setCardActivity = props.setCardActivity;
+
+  let initialCardStatus;
+  switch (finishedStatus) {
+    case 'unfinished':
+      initialCardStatus = 'closed'
+      break;
+    case 'opened':
+      initialCardStatus = 'opened'
+      break;
+    default:
+      initialCardStatus = 'finished';
+      break;
+  }
 
   const [answerStatus, setAnswerStatus] = useState(finishedStatus);
   const [cardStatus, setCardStatus] = useState(initialCardStatus);
@@ -139,7 +152,13 @@ function Card(props) {
 
   const playClick = () => {
 
-    setCardStatus('opened');
+    if (!cardActivity) {
+      setCardActivity(true);
+      setCardStatus('opened');
+      let updatedFinishedCards = [...finishedCards];
+      updatedFinishedCards[props.index] = 'opened';
+      setFinishedCards(updatedFinishedCards)
+    }
 
   };
 
@@ -170,6 +189,7 @@ function Card(props) {
     updatedFinishedCards[props.index] = status;
     setFinishedCards(updatedFinishedCards);
     setAnswerStatus(status);
+    setCardActivity(false);
     setStatusNumber(prevStatusNumber => prevStatusNumber + 1);
 
   };
