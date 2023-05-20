@@ -18,7 +18,7 @@ function App() {
     { question: "Usamos estado (state) para __", answer: "Dizer quais informações quando atualizadas devem renderizar a tela novamente" }
   ]
 
-  const [finishedCards, setFinishedCards] = useState(Array(flashcards.length).fill(-1))
+  const [finishedCards, setFinishedCards] = useState(Array(flashcards.length).fill('unfinished'))
 
   return (
     <>

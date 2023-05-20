@@ -14,10 +14,17 @@ function Card(props) {
   const finishedStatus = finishedCards[props.index];
 
   let initialCardStatus; 
-  finishedStatus == -1 ? initialCardStatus = 'closed' : initialCardStatus = 'finished';
+  finishedStatus == 'unfinished' ? initialCardStatus = 'closed' : initialCardStatus = 'finished';
 
   const [answerStatus, setAnswerStatus] = useState(finishedStatus);
   const [cardStatus, setCardStatus] = useState(initialCardStatus);
+
+  const cardStatusColors = {
+    'unfinished': '#333333',
+    0: '#FF3030',
+    1: '#FF922E',
+    2: '#2FBE34',
+  };
 
   const cardText = {
     'closed': 'Pergunta ' + (props.index + 1),
@@ -65,7 +72,8 @@ function Card(props) {
         font-weight: ${['closed', 'finished'].includes(cardStatus) ? '700' : '400'};
         font-size: ${['closed', 'finished'].includes(cardStatus) ? '16px' : '18px'};
         line-height: ${['closed', 'finished'].includes(cardStatus) ? '19px' : '22px'};
-        color: #333333;
+        color: ${cardStatusColors[answerStatus]};
+        text-decoration: ${['finished'].includes(cardStatus) ? 'line-through' : 'none'};
       }
 
       [style_id= "playButton"] {
